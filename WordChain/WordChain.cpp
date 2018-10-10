@@ -41,7 +41,7 @@ public:
 };
 
 
-class WordChain : public Player
+class WordChain : public Player, public Check
 {
 	string start, nword;
 	char last, start;
@@ -65,15 +65,50 @@ public:
 				player == 1;
 			player += 1;
 			getline(cin, nword);
-			if (last = nword[0])
+			Check::Check();
+			if (dice == 1)
 			{
-				start = nword;
-				
+				cout<< "Pass 다음 선수가 진행하세요" << endl;
+			}
+			else if (dice == 2)
+			{
+				if(last = nword[0] && nword.length == 3)
+					{
+					Check::Agree();
+					start = nword;	
+					continue;
+					}
+				else
+				{
+					cout << player-- << "이 졌습니다" << endl;
+					break;
+				}
+			}
+			else if (dice == 3)
+			{
+				if (last = nword[0] && nword.length == 2)
+				{
+					start = nword;
+					continue;
+				}
+				else
+				{
+					cout << player-- << "이 졌습니다" << endl;
+					break;
+				}
 			}
 			else
 			{
-				cout << player-- << "이 졌습니다" << endl;
-				break;
+				if (last = nword[0])
+				{
+					start = nword;
+					continue;
+				}
+				else
+				{
+					cout << player-- << "이 졌습니다" << endl;
+					break;
+				}
 			}
 		}
 	}
@@ -82,7 +117,7 @@ public:
 
 class Dice
 {
-private:
+protected:
 	int dice;
 public:
 	void random() {
@@ -100,15 +135,16 @@ public:
 		else
 			cout << "자유롭게" << endl;
 	}
+	
 };
 
 class Check : public Dice
 {
 public:
-	Check() : Dice()
+	Check()
 	{
-		void random();
-		void choice();
+		Dice::random();
+		Dice::choice();
 		
 	}
 	bool Agree()
