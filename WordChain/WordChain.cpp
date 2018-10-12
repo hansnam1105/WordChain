@@ -8,7 +8,7 @@
 #include <iostream>
 #include <string>
 #include <ctime>
-#include <cstlib>
+#include <cstdlib>
 
 using namespace std;
 
@@ -19,12 +19,11 @@ int main(void)
 {
 	int time = 15;
 	cout << "Welcome to WordChain!" << endl;
-	
-	
-	
-
-
-}
+	Player::Player();
+	WordChain::WordChain();
+	WordChain wchain;
+	wchain.game();
+	}
 
 
 
@@ -43,14 +42,16 @@ public:
 
 class WordChain : public Player, public Check
 {
-	string start, nword;
-	char last, start;
+protected:
+	char* start;
+	char* nword;
+	char last, first;
 public:
 	WordChain()
 	{
 		cout << "시작 단어를 입력해주세요 : ";
-		getline(cin, start);
-		int length = start.length;
+		cin>> start;
+		int length = sizeof(start);
 		last = start[length-1];
 	}
 	void game()
@@ -64,7 +65,7 @@ public:
 			if (player == numplayer)
 				player == 1;
 			player += 1;
-			getline(cin, nword);
+			cin>> nword;
 			Check::Check();
 			if (dice == 1)
 			{
@@ -72,11 +73,19 @@ public:
 			}
 			else if (dice == 2)
 			{
-				if(last = nword[0] && nword.length == 3)
+				if(last = first && sizeof(nword)= 3)
 					{
 					Check::Agree();
-					start = nword;	
-					continue;
+					if (agree == 1) 
+					{
+						*start = *nword;
+						continue;
+					}
+					else
+					{
+						cout << player-- << "이 졌습니다" << endl;
+						break;
+					}
 					}
 				else
 				{
@@ -86,10 +95,19 @@ public:
 			}
 			else if (dice == 3)
 			{
-				if (last = nword[0] && nword.length == 2)
+				if (last = nword[0] && sizeof(nword) == 2)
 				{
-					start = nword;
-					continue;
+					Check::Agree();
+					if (agree == 1)
+					{
+						*start = *nword;
+						continue;
+					}
+					else
+					{
+						cout << player-- << "이 졌습니다" << endl;
+						break;
+					}
 				}
 				else
 				{
@@ -101,8 +119,17 @@ public:
 			{
 				if (last = nword[0])
 				{
-					start = nword;
-					continue;
+					Check::Agree();
+					if (agree == 1)
+					{
+						*start = *nword;
+						continue;
+					}
+					else
+					{
+						cout << player-- << "이 졌습니다" << endl;
+						break;
+					}
 				}
 				else
 				{
@@ -140,6 +167,8 @@ public:
 
 class Check : public Dice
 {
+protected:
+	int agree;
 public:
 	Check()
 	{
@@ -149,7 +178,6 @@ public:
 	}
 	bool Agree()
 	{
-		int agree;
 		cout << "Agree?\n1.Yes\n2.No" << endl;
 		cin >> agree;
 		if (agree == 1)
