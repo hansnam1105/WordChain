@@ -13,11 +13,10 @@
 using namespace std;
 
 int numplayer;
+int dice;
 
 class Dice
 {
-protected:
-	int dice;
 public:
 	void random() {
 		srand((unsigned int)time(NULL));
@@ -25,8 +24,9 @@ public:
 	}
 	void choice()
 	{
-		
-		if (dice == 2)
+		if (dice == 1)
+			cout << "PASS 다음 플레이어 진행" << endl;
+		else if (dice == 2)
 			cout << "2글자" << endl;
 		else if (dice == 3)
 			cout << "3글자" << endl;
@@ -45,9 +45,11 @@ protected:
 public:
 	Check()
 	{
+	}
+	void Diceroll()
+	{
 		Dice::random();
 		Dice::choice();
-
 	}
 	bool Agree()
 	{
@@ -74,36 +76,42 @@ public:
 
 class WordChain : public Player, public Check
 {
+protected:
 	wstring start;
 	wstring nword;
-	char last;
-	char first;
 public:
 	void startWordChain()
 	{
 		Player::playernum();
 		cout << "시작 단어를 입력해주세요 : ";
-		wcin>> start;
+		wcin >> start;
 	}
 	void game()
 	{
-		
-		int player=1;
+		int player = 1;
 		wcout << "시작 단어는 " << start << "입니다" << endl;
 		while (1)
 		{
+			if (player > numplayer)
+				player = 1;
 			cout << "Player" << player << "의 차례입니다>>";
-			Check::Check();
-			wcin >>nword;
+			Check::Diceroll();
+			if (dice == 1)
+			{
+				player++;
+				continue;
+			}
+			fflush(stdin);
+			wcin >> nword;
 			int length = start.length();
 			if (dice == 2)
 			{
-				if( start.at(length-2)== nword.at(0) && start.at(length-1) == nword.at(1) && nword.length() == 4)
-					{
+				if (start.at(length - 2) == nword.at(0) && start.at(length - 1) == nword.at(1) && nword.length() == 4)
+				{
 					Check::Agree();
-					if (agree == 1) 
+					if (agree == 1)
 					{
-						start= nword;
+						start = nword;
 						player++;
 						continue;
 					}
@@ -112,7 +120,7 @@ public:
 						cout << player << "이 졌습니다" << endl;
 						break;
 					}
-					}
+				}
 				else
 				{
 					cout << player << "이 졌습니다" << endl;
@@ -165,7 +173,7 @@ public:
 					break;
 				}
 			}
-			else
+			else if(dice ==5 || dice ==6)
 			{
 				if (start.at(length - 2) == nword.at(0) && start.at(length - 1) == nword.at(1))
 				{
@@ -188,8 +196,7 @@ public:
 					break;
 				}
 			}
-			if (player == numplayer)
-				player = 1;
+		
 		}
 	}
 
