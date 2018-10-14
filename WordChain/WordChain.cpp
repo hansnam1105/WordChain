@@ -25,9 +25,8 @@ public:
 	}
 	void choice()
 	{
-		if (dice == 1)
-			cout << "Pass" << endl;
-		else if (dice == 2)
+		
+		if (dice == 2)
 			cout << "2글자" << endl;
 		else if (dice == 3)
 			cout << "3글자" << endl;
@@ -75,8 +74,8 @@ public:
 
 class WordChain : public Player, public Check
 {
-	string start;
-	string nword;
+	wstring start;
+	wstring nword;
 	char last;
 	char first;
 public:
@@ -84,117 +83,113 @@ public:
 	{
 		Player::playernum();
 		cout << "시작 단어를 입력해주세요 : ";
-		cin>> start;
-		int length = start.length();
-		last = start[length-1];
+		wcin>> start;
 	}
 	void game()
 	{
 		
 		int player=1;
-		cout << "시작 단어는" << start << "입니다" << endl;
+		wcout << "시작 단어는 " << start << "입니다" << endl;
 		while (1)
 		{
 			cout << "Player" << player << "의 차례입니다>>";
-			if (player == numplayer)
-				player = 1;
-			player++;
 			Check::Check();
-			cin>> nword;
-			first = nword[0];
-			
-			if (dice == 1)
+			wcin >>nword;
+			int length = start.length();
+			if (dice == 2)
 			{
-				cout<< "Pass 다음 선수가 진행하세요" << endl;
-			}
-			else if (dice == 2)
-			{
-				if(last == first && sizeof(nword)== 2)
+				if( start.at(length-2)== nword.at(0) && start.at(length-1) == nword.at(1) && nword.length() == 4)
 					{
 					Check::Agree();
 					if (agree == 1) 
 					{
 						start= nword;
+						player++;
 						continue;
 					}
 					else
 					{
-						cout << --player << "이 졌습니다" << endl;
+						cout << player << "이 졌습니다" << endl;
 						break;
 					}
 					}
 				else
 				{
-					cout << --player << "이 졌습니다" << endl;
+					cout << player << "이 졌습니다" << endl;
 					break;
 				}
 			}
 			else if (dice == 3)
 			{
-				if (last = first && sizeof(nword) == 3)
+				if (start.at(length - 2) == nword.at(0) && start.at(length - 1) == nword.at(1) && nword.length() == 6)
 				{
 					Check::Agree();
 					if (agree == 1)
 					{
 						start = nword;
+						player++;
 						continue;
 					}
 					else
 					{
-						cout << --player << "이 졌습니다" << endl;
+						cout << player << "이 졌습니다" << endl;
 						break;
 					}
 				}
 				else
 				{
-					cout << --player << "이 졌습니다" << endl;
+					cout << player << "이 졌습니다" << endl;
 					break;
 				}
 			}
 			else if (dice == 4)
 			{
-				if (last = first && sizeof(nword) == 4)
+				if (start.at(length - 2) == nword.at(0) && start.at(length - 1) == nword.at(1) && nword.length() == 8)
 				{
 					Check::Agree();
 					if (agree == 1)
 					{
 						start = nword;
+						player++;
 						continue;
 					}
 					else
 					{
-						cout << --player << "이 졌습니다" << endl;
+						cout << player << "이 졌습니다" << endl;
 						break;
 					}
 				}
 				else
 				{
-					cout << --player << "이 졌습니다" << endl;
+					cout << player << "이 졌습니다" << endl;
 					break;
 				}
 			}
 			else
 			{
-				if (last = first)
+				if (start.at(length - 2) == nword.at(0) && start.at(length - 1) == nword.at(1))
 				{
 					Check::Agree();
 					if (agree == 1)
 					{
 						start = nword;
+						player++;
 						continue;
 					}
 					else
 					{
-						cout << --player << "이 졌습니다" << endl;
+						cout << player << "이 졌습니다" << endl;
 						break;
 					}
 				}
 				else
 				{
-					cout << --player << "이 졌습니다" << endl;
+					cout << player << "이 졌습니다" << endl;
 					break;
 				}
 			}
+			if (player == numplayer)
+				player = 1;
 		}
 	}
 
