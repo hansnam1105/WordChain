@@ -15,40 +15,79 @@ using namespace std;
 int numplayer;
 int cnt = 0;
 
-int main(void)
-{
-	int time = 15;
-	cout << "Welcome to WordChain!" << endl;
-	Player::Player();
-	WordChain::WordChain();
-	WordChain wchain;
-	wchain.game();
-	}
+
 
 
 
 class Player
 {
-	int temp = 1;
-	int pnumber;
 public:
-	Player()
+	void playernum()
 	{
 		cout << "Enter how many players are going to play: ";
 		cin >> numplayer;
 	}
 };
+class Dice
+{
+protected:
+	int dice;
+public:
+	void random() {
+		srand((unsigned int)time(NULL));
+		dice = rand() % 6 + 1;
+	}
+	void choice()
+	{
+		if (dice == 1)
+			cout << "Pass" << endl;
+		else if (dice == 2)
+			cout << "3글자" << endl;
+		else if (dice == 3)
+			cout << "2글자" << endl;
+		else
+			cout << "자유롭게" << endl;
+	}
 
+};
+
+
+
+class Check : public Dice
+{
+protected:
+	int agree;
+public:
+	Check()
+	{
+		Dice::random();
+		Dice::choice();
+
+	}
+	bool Agree()
+	{
+		cout << "Agree?\n1.Yes\n2.No" << endl;
+		cin >> agree;
+		if (agree == 1)
+			return true;
+		else
+			return false;
+	}
+
+
+};
 
 class WordChain : public Player, public Check
 {
 protected:
 	char* start;
 	char* nword;
-	char last, first;
+	char last;
+	char first;
 public:
-	WordChain()
+	void startWordChain()
 	{
+		Player::playernum();
 		cout << "시작 단어를 입력해주세요 : ";
 		cin>> start;
 		int length = sizeof(start);
@@ -63,9 +102,10 @@ public:
 		{
 			cout << "Player" << player << "의 차례입니다>>";
 			if (player == numplayer)
-				player == 1;
+				player = 1;
 			player += 1;
 			cin>> nword;
+			first = nword[sizeof(nword)];
 			Check::Check();
 			if (dice == 1)
 			{
@@ -73,7 +113,7 @@ public:
 			}
 			else if (dice == 2)
 			{
-				if(last = first && sizeof(nword)= 3)
+				if(last == first && sizeof(nword)== 3)
 					{
 					Check::Agree();
 					if (agree == 1) 
@@ -95,7 +135,7 @@ public:
 			}
 			else if (dice == 3)
 			{
-				if (last = nword[0] && sizeof(nword) == 2)
+				if (last = first && sizeof(nword) == 2)
 				{
 					Check::Agree();
 					if (agree == 1)
@@ -117,7 +157,7 @@ public:
 			}
 			else
 			{
-				if (last = nword[0])
+				if (last = first)
 				{
 					Check::Agree();
 					if (agree == 1)
@@ -142,49 +182,12 @@ public:
 
 };
 
-class Dice
+int main(void)
 {
-protected:
-	int dice;
-public:
-	void random() {
-		srand((unsigned int)time(NULL));
-		dice = rand() % 6 + 1;
-	}
-	void choice()
-	{
-		if (dice == 1)
-			cout << "Pass" << endl;
-		else if (dice == 2)
-			cout << "3글자" << endl;
-		else if (dice == 3)
-			cout << "2글자" << endl;
-		else
-			cout << "자유롭게" << endl;
-	}
-	
-};
-
-class Check : public Dice
-{
-protected:
-	int agree;
-public:
-	Check()
-	{
-		Dice::random();
-		Dice::choice();
-		
-	}
-	bool Agree()
-	{
-		cout << "Agree?\n1.Yes\n2.No" << endl;
-		cin >> agree;
-		if (agree == 1)
-			return true;
-		else
-			return false;
-	}
-	
-
-};
+	int time = 15;
+	cout << "Welcome to WordChain!" << endl;
+	WordChain word;
+	word.startWordChain();
+	word.game();
+	return 0;
+}
