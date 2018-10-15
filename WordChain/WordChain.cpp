@@ -68,7 +68,7 @@ class Player
 public:
 	void playernum()
 	{
-		cout << "Enter how many players are going to play: ";
+		cout << "몇명이 플레이 할지 입력해주세요:  ";
 		cin >> numplayer;
 	}
 };
@@ -204,7 +204,7 @@ public:
 int main(void)
 {
 	srand((unsigned int)time(NULL));
-	cout << "Welcome to WordChain!" << endl;
+	cout << "한글 끝말잇기  시작~~!" << endl;
 	WordChain word;
 	word.startWordChain();
 	word.game();
