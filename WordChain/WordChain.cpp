@@ -24,15 +24,15 @@ public:
 	void choice()
 	{
 		if (dice == 1)
-			cout << "PASS 다음 플레이어 진행" << dice << endl;
+			cout << "주사위 값 : " << dice << "PASS 다음 플레이어 진행" << endl;
 		else if (dice == 2)
-			cout << "2글자" << dice<< endl;
+			cout << "주사위 값 : " << dice << "2글자" << endl;
 		else if (dice == 3)
-			cout << "3글자" << dice << endl;
+			cout << "주사위 값 : " << dice << "3글자"<< endl;
 		else if (dice == 4)
-			cout << "4글자" << dice <<endl;
+			cout << "주사위 값 : " << dice << "4글자"<<endl;
 		else
-			cout << "자유롭게" << dice<< endl;
+			cout << "주사위 값 : " << dice << "자유롭게"<< endl;
 	}
 
 };
@@ -93,7 +93,7 @@ public:
 		{
 			if (player > numplayer)
 				player = 1;
-			cout << "Player" << player << "의 차례입니다>>";
+			cout << "Player" << player << "의 차례입니다>>"; << endl;
 			Check::Diceroll();
 			if (dice == 1)
 			{
