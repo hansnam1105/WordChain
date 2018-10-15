@@ -19,21 +19,20 @@ class Dice
 {
 public:
 	void random() {
-		srand((unsigned int)time(NULL));
 		dice = rand() % 6 + 1;
 	}
 	void choice()
 	{
 		if (dice == 1)
-			cout << "PASS 다음 플레이어 진행" << endl;
+			cout << "PASS 다음 플레이어 진행" << dice << endl;
 		else if (dice == 2)
-			cout << "2글자" << endl;
+			cout << "2글자" << dice<< endl;
 		else if (dice == 3)
-			cout << "3글자" << endl;
+			cout << "3글자" << dice << endl;
 		else if (dice == 4)
-			cout << "4글자" << endl;
+			cout << "4글자" << dice <<endl;
 		else
-			cout << "자유롭게" << endl;
+			cout << "자유롭게" << dice<< endl;
 	}
 
 };
@@ -204,6 +203,7 @@ public:
 
 int main(void)
 {
+	srand((unsigned int)time(NULL));
 	cout << "Welcome to WordChain!" << endl;
 	WordChain word;
 	word.startWordChain();
