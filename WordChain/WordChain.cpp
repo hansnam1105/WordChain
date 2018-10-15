@@ -93,7 +93,7 @@ public:
 		{
 			if (player > numplayer)
 				player = 1;
-			cout << "Player" << player << "의 차례입니다>>"; << endl;
+			cout << "Player" << player << "의 차례입니다>>" << endl;
 			Check::Diceroll();
 			if (dice == 1)
 			{
