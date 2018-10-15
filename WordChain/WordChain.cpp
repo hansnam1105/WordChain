@@ -85,7 +85,7 @@ public:
 		cout << "시작 단어를 입력해주세요 : ";
 		wcin >> start;
 	}
-	void game()
+	void continuegame()
 	{
 		int player = 1;
 		wcout << "시작 단어는 " << start << "입니다" << endl;
@@ -207,6 +207,6 @@ int main(void)
 	cout << "한글 끝말잇기  시작~~!" << endl;
 	WordChain word;
 	word.startWordChain();
-	word.game();
+	word.continuegame();
 	return 0;
 }
