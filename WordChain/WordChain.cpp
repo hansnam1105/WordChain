@@ -28,11 +28,11 @@ public:
 		else if (dice == 2)
 			cout << "주사위 값 : " << dice << " | 2글자 입력" << endl;
 		else if (dice == 3)
-			cout << "주사위 값 : " << dice << " | 3글자 입력" << endl;
+			cout << "주사위 값 : " << dice << " | 3글자 입력"<< endl;
 		else if (dice == 4)
-			cout << "주사위 값 : " << dice << " | 4글자 입력" << endl;
+			cout << "주사위 값 : " << dice << " | 4글자 입력"<<endl;
 		else
-			cout << "주사위 값 : " << dice << "자유롭게" << endl;
+			cout << "주사위 값 : " << dice << "자유롭게"<< endl;
 	}
 
 };
@@ -172,7 +172,7 @@ public:
 					break;
 				}
 			}
-			else if (dice == 5 || dice == 6)
+			else if(dice ==5 || dice ==6)
 			{
 				if (start.at(length - 2) == nword.at(0) && start.at(length - 1) == nword.at(1))
 				{
@@ -195,7 +195,7 @@ public:
 					break;
 				}
 			}
-
+		
 		}
 	}
 
