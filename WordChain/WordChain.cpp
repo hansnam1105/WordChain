@@ -8,112 +8,50 @@
 #include <iostream>
 #include <string>
 #include <ctime>
-#include <cstlib>
+#include <cstdlib>
 
 using namespace std;
 
 int numplayer;
-int cnt = 0;
-
-int main(void)
-{
-	int time = 15;
-	cout << "Welcome to WordChain!" << endl;
-	
-	
-	
-
-
-}
-
-
-
-class Player
-{
-	int temp = 1;
-	int pnumber;
-public:
-	Player()
-	{
-		cout << "Enter how many players are going to play: ";
-		cin >> numplayer;
-	}
-};
-
-
-class WordChain : public Player
-{
-	string start, nword;
-	char last, start;
-public:
-	WordChain()
-	{
-		cout << "시작 단어를 입력해주세요 : ";
-		getline(cin, start);
-		int length = start.length;
-		last = start[length-1];
-	}
-	void game()
-	{
-		
-		int player=1;
-		cout << "시작 단어는" << start << "입니다" << endl;
-		while (1)
-		{
-			cout << "Player" << player << "의 차례입니다>>";
-			if (player == numplayer)
-				player == 1;
-			player += 1;
-			getline(cin, nword);
-			if (last = nword[0])
-			{
-				start = nword;
-				
-			}
-			else
-			{
-				cout << player-- << "이 졌습니다" << endl;
-				break;
-			}
-		}
-	}
-
-};
+int dice;
 
 class Dice
 {
-private:
-	int dice;
 public:
 	void random() {
-		srand((unsigned int)time(NULL));
 		dice = rand() % 6 + 1;
 	}
 	void choice()
 	{
 		if (dice == 1)
-			cout << "Pass" << endl;
+			cout << "주사위 값 : " << dice << " | PASS 다음 플레이어 진행" << endl;
 		else if (dice == 2)
-			cout << "3글자" << endl;
+			cout << "주사위 값 : " << dice << " | 2글자 입력" << endl;
 		else if (dice == 3)
-			cout << "2글자" << endl;
+			cout << "주사위 값 : " << dice << " | 3글자 입력" << endl;
+		else if (dice == 4)
+			cout << "주사위 값 : " << dice << " | 4글자 입력" << endl;
 		else
-			cout << "자유롭게" << endl;
+			cout << "주사위 값 : " << dice << "자유롭게" << endl;
 	}
+
 };
 
 class Check : public Dice
 {
+protected:
+	int agree;
 public:
-	Check() : Dice()
+	Check()
 	{
-		void random();
-		void choice();
-		
+	}
+	void Diceroll()
+	{
+		Dice::random();
+		Dice::choice();
 	}
 	bool Agree()
 	{
-		int agree;
 		cout << "Agree?\n1.Yes\n2.No" << endl;
 		cin >> agree;
 		if (agree == 1)
@@ -121,6 +59,154 @@ public:
 		else
 			return false;
 	}
-	
+
 
 };
+
+class Player
+{
+public:
+	void playernum()
+	{
+		cout << "몇명이 플레이 할지 입력해주세요:  ";
+		cin >> numplayer;
+	}
+};
+
+class WordChain : public Player, public Check
+{
+protected:
+	wstring start;
+	wstring nword;
+public:
+	void startWordChain()
+	{
+		Player::playernum();
+		cout << "시작 단어를 입력해주세요 : ";
+		wcin >> start;
+	}
+	void continuegame()
+	{
+		int player = 1;
+		wcout << "시작 단어는 " << start << "입니다" << endl;
+		while (1)
+		{
+			if (player > numplayer)
+				player = 1;
+			cout << "Player" << player << "의 차례입니다>>" << endl;
+			Check::Diceroll();
+			if (dice == 1)
+			{
+				player++;
+				continue;
+			}
+			fflush(stdin);
+			wcin >> nword;
+			int length = start.length();
+			if (dice == 2)
+			{
+				if (start.at(length - 2) == nword.at(0) && start.at(length - 1) == nword.at(1) && nword.length() == 4)
+				{
+					Check::Agree();
+					if (agree == 1)
+					{
+						start = nword;
+						player++;
+						continue;
+					}
+					else
+					{
+						cout << player << "이 졌습니다" << endl;
+						break;
+					}
+				}
+				else
+				{
+					cout << player << "이 졌습니다" << endl;
+					break;
+				}
+			}
+			else if (dice == 3)
+			{
+				if (start.at(length - 2) == nword.at(0) && start.at(length - 1) == nword.at(1) && nword.length() == 6)
+				{
+					Check::Agree();
+					if (agree == 1)
+					{
+						start = nword;
+						player++;
+						continue;
+					}
+					else
+					{
+						cout << player << "이 졌습니다" << endl;
+						break;
+					}
+				}
+				else
+				{
+					cout << player << "이 졌습니다" << endl;
+					break;
+				}
+			}
+			else if (dice == 4)
+			{
+				if (start.at(length - 2) == nword.at(0) && start.at(length - 1) == nword.at(1) && nword.length() == 8)
+				{
+					Check::Agree();
+					if (agree == 1)
+					{
+						start = nword;
+						player++;
+						continue;
+					}
+					else
+					{
+						cout << player << "이 졌습니다" << endl;
+						break;
+					}
+				}
+				else
+				{
+					cout << player << "이 졌습니다" << endl;
+					break;
+				}
+			}
+			else if (dice == 5 || dice == 6)
+			{
+				if (start.at(length - 2) == nword.at(0) && start.at(length - 1) == nword.at(1))
+				{
+					Check::Agree();
+					if (agree == 1)
+					{
+						start = nword;
+						player++;
+						continue;
+					}
+					else
+					{
+						cout << player << "이 졌습니다" << endl;
+						break;
+					}
+				}
+				else
+				{
+					cout << player << "이 졌습니다" << endl;
+					break;
+				}
+			}
+
+		}
+	}
+
+};
+
+int main(void)
+{
+	srand((unsigned int)time(NULL));
+	cout << "한글 끝말잇기  시작~~!" << endl;
+	WordChain word;
+	word.startWordChain();
+	word.continuegame();
+	return 0;
+}
