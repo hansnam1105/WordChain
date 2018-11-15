@@ -1,10 +1,3 @@
-/*
-20174673 한승남
-끝말잇기
-우선은 영어 버전
-플레이어 수 입력 후 플레이어 1 시작으로 제한 시간(넣을 예정)안에 단어를 입력해야한다. 입력후 다른 플레이어들의 통합적 동의를 얻어야함
-사실적 동의로 정치가능한 우정 파괴 게임
-*/
 #include <iostream>
 #include <string>
 #include <ctime>
@@ -261,7 +254,7 @@ public:
 
 };
 
-class Penalty :public Player
+class Penalty
 {
 	int penalnum;
 	string *penalty;
@@ -273,12 +266,13 @@ public:
 		cout << "벌칙 리스트" << endl;
 		cout << "몇개의 벌칙을 만들지 입력해주세요 >>";
 		cin >> penalnum;
+		cin.ignore();
 		penalty = new string[penalnum];
 		cout << "벌칙들을 입력해주세요" << endl;
 		for (int i = 0; i < penalnum; i++)
 		{
 			cout << "벌칙" << i + 1 << ": ";
-			cin >> penalty[i];
+			getline(cin, penalty[i]);
 		}
 	}
 
