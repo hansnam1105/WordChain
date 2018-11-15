@@ -21,7 +21,8 @@ class Dice
 public:
 	Dice()
 	{
-		cout << "주사위 종류를 선택해주세요>> \n1.기본주사위(6)\n2.8면주사위" << endl;
+		cout << "주사위 종류를 선택해주세요>> " << endl;
+		cout << "1.기본주사위(6)\n2.8면주사위" << endl;
 		cin >> select;
 	}
 	void random() {
@@ -46,9 +47,9 @@ public:
 		else if (dice == 5 || dice == 6)
 			cout << "주사위 값 : " << dice << "자유롭게" << endl;
 		else if (dice == 7)
-			cout << "주사위 값 : " << dice << "사자성어" << endl;
+			cout << "주사위 값 : " << dice << "조건없이 사자성어" << endl;
 		else
-			cout << "주사위 값 : " << dice << "" << endl;
+			cout << "주사위 값 : " << dice << "아무 속담이나 적어주세요" << endl;
 	}
 
 };
@@ -82,10 +83,21 @@ public:
 class Player
 {
 public:
+	string *pname;
+public:
 	void playernum()
 	{
 		cout << "몇명이 플레이 할지 입력해주세요:  ";
 		cin >> numplayer;
+	}
+	void playeradd()
+	{
+		pname = new string[numplayer];
+		for (int i = 0; i < numplayer; i++)
+		{
+			cout << "참가자의 이름을 입력해주세요>>";
+			cin >> pname[i];
+		}
 	}
 };
 
@@ -98,6 +110,7 @@ public:
 	void startWordChain()
 	{
 		Player::playernum();
+		Player::playeradd();
 		cout << "시작 단어를 입력해주세요 : ";
 		wcin >> start;
 	}
@@ -109,7 +122,7 @@ public:
 		{
 			if (player > numplayer)
 				player = 1;
-			cout << "Player" << player << "의 차례입니다>>" << endl;
+			cout << "Player" << pname[player-1] << "의 차례입니다>>" << endl;
 			Check::Diceroll();
 			if (dice == 1)
 			{
@@ -211,11 +224,9 @@ public:
 					break;
 				}
 			}
-			else if (dice == 7)
+			else if (dice == 7 || dice ==8)
 			{
-				if (start.at(length - 2) == nword.at(0) && start.at(length - 1) == nword.at(1))
-				{
-					Check::Agree();
+				Check::Agree();
 					if (agree == 1)
 					{
 						start = nword;
@@ -227,12 +238,6 @@ public:
 						cout << player << "이 졌습니다" << endl;
 						break;
 					}
-				}
-				else
-				{
-					cout << player << "이 졌습니다" << endl;
-					break;
-				}
 			}
 		
 		}
@@ -250,7 +255,9 @@ int main(void)
 	if (dlc == 1)
 	{
 		cout << "----------------------------------------------------------" << endl;
-		cout << "이번 DLC에는 8면 주사위를 추가했습니다!\n주사위 7이 나올시 사자성어를 입력해야 합니다\n주사위 8이 나올시 " << endl;
+		cout << "이번 DLC에는 8면 주사위를 추가했습니다!" << endl;
+		cout << "주사위 7이 나올시 사자성어를 입력해야 합니다\n주사위 8이 나올시 속담 입력" << endl;
+		cout << "----------------------------------------------------------" << endl;
 	}
 	WordChain word;
 	word.startWordChain();
