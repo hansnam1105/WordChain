@@ -13,6 +13,15 @@
 - 5 와 6은 자유롭게 대답<br>
 3. 아무 말이나 써서 통과가 되지 않게 다른 플레이어들의 동의를 받아야 다음 차례로 가게 하는 시스템을 넣었다.
 
+#### 시작
+![initial](https://github.com/hansnam1105/WordChain/blob/master/Example/example1.png) 
 
 
+#### 설명
+![explanation](https://github.com/hansnam1105/WordChain/blob/master/Example/example2.png)
 
+#### 사용자
+![players](https://github.com/hansnam1105/WordChain/blob/master/Example/example4.png)
+
+#### 게임오버
+![gameover](https://github.com/hansnam1105/WordChain/blob/master/Example/example5.png)
